@@ -1,0 +1,318 @@
+/* Game Page Styles */
+.game-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* Game Header */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.player1, .player2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.username {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.trophies {
+  color: var(--primary-gold);
+  font-size: 14px;
+}
+
+.vs {
+  color: var(--text-secondary);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.game-timer {
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.game-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.game-actions .btn {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+/* Game Canvas */
+.game-canvas-wrapper {
+  position: relative;
+  background: #000;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Elixir Bar */
+.elixir-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 200px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--primary-gold);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.elixir-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 2;
+}
+
+.elixir-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-gold), #FFD700);
+  transition: width 0.3s ease;
+}
+
+/* Hand Cards */
+.hand-cards {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+}
+
+.hand-card {
+  position: absolute;
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid var(--primary-gold);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.hand-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hand-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card-elixir {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--primary-gold);
+  color: var(--text-dark);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.card-name {
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Drag Preview */
+.drag-preview {
+  position: fixed;
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid var(--primary-gold);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Connection Status */
+.connection-status {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.connection-status.connected {
+  background: rgba(39, 174, 96, 0.2);
+  color: #27AE60;
+  border: 1px solid #27AE60;
+}
+
+.connection-status.disconnected {
+  background: rgba(231, 76, 60, 0.2);
+  color: #E74C3C;
+  border: 1px solid #E74C3C;
+}
+
+/* Game States */
+.game-waiting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: var(--text-primary);
+}
+
+.game-waiting h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.game-waiting p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 10px;
+  }
+  
+  .game-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .player-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .vs {
+    order: -1;
+  }
+  
+  .game-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .elixir-bar {
+    width: 150px;
+    height: 16px;
+  }
+  
+  .hand-card {
+    width: 60px;
+    height: 80px;
+  }
+  
+  .card-name {
+    font-size: 8px;
+  }
+}
+
+/* Animations */
+@keyframes cardPlay {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes damageFlash {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.card-play-animation {
+  animation: cardPlay 0.5s ease-out;
+}
+
+.damage-flash {
+  animation: damageFlash 0.3s ease-out;
+}
