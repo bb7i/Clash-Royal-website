@@ -42,57 +42,43 @@ play.bat
 
 ## Быстрый старт
 
-### Для разработки (рекомендуется)
+### Для разработки (без Docker)
 
-1. **Запуск инфраструктуры:**
-```bash
-# Windows PowerShell
-.\start-dev.ps1
-
-# Или вручную
-docker-compose -f docker-compose.dev.yml up -d
-```
+1. **Установите PostgreSQL и Redis локально:**
+- PostgreSQL 14+ (пользователь: `clashroyale`, пароль: `clashroyale123`, БД: `clashroyale`)
+- Redis 6+ (по умолчанию `redis://localhost:6379`)
 
 2. **Установка зависимостей:**
 ```bash
-# Auth Service
-cd services/auth-service
+# Корневой сервис (Game Service)
 npm install
 
-# User Service  
-cd ../user-service
-npm install
+# Notification Service
+cd notification-service && npm install && cd ..
 
 # Frontend
-cd ../../frontend
-npm install
+cd frontend && npm install && cd ..
 ```
 
 3. **Запуск сервисов:**
 ```bash
-# Terminal 1 - Auth Service
-cd services/auth-service
+# Терминал 1 - Game Service (корень)
 npm run dev
 
-# Terminal 2 - User Service
-cd services/user-service  
-npm run dev
+# Терминал 2 - Notification Service
+cd notification-service && npm run dev
 
-# Terminal 3 - Frontend
-cd frontend
-npm run dev
+# Терминал 3 - Frontend
+cd frontend && npm run dev
 ```
 
 4. **Доступ к приложению:**
 - Frontend: http://localhost:3000
-- API Gateway: http://localhost:80
+- Game Service (health): http://localhost:3005/health
+- Notification Service (health): http://localhost:3006/health
 
-### Для продакшена
-
-```bash
-# Запуск всех сервисов
-docker-compose up -d
-```
+### Продакшен
+Без Docker: разверните PostgreSQL/Redis и запустите те же сервисы, настроив переменные окружения (`.env`).
 
 ## Структура проекта
 

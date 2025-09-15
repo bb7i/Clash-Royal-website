@@ -44,24 +44,17 @@ try {
     exit 1
 }
 
-# Start Docker services
-Write-Host "`n🐳 Starting PostgreSQL and Redis..." -ForegroundColor Yellow
-docker-compose -f docker-compose.dev.yml up -d
-
-# Wait for services
-Write-Host "⏳ Waiting for services to start..." -ForegroundColor Yellow
-Start-Sleep -Seconds 15
+# No Docker mode
+Write-Host "`n⏳ Preparing environment (no Docker)..." -ForegroundColor Yellow
+Write-Host "Ensure PostgreSQL and Redis are running locally." -ForegroundColor Yellow
+Start-Sleep -Seconds 3
 
 # Install dependencies if needed
 Write-Host "`n📦 Checking dependencies..." -ForegroundColor Yellow
 
 $services = @(
-    "services\auth-service",
-    "services\user-service", 
-    "services\deck-service",
-    "services\matchmaking-service",
-    "services\game-service",
-    "services\notification-service",
+    ".",              # root game service
+    "notification-service",
     "frontend"
 )
 
@@ -96,22 +89,10 @@ function Start-Service {
 # Start all services
 $jobs = @()
 
-$jobs += Start-Service "Auth Service" "services\auth-service" "3001"
+$jobs += Start-Service "Game Service" "." "3005"
 Start-Sleep -Seconds 2
 
-$jobs += Start-Service "User Service" "services\user-service" "3002"
-Start-Sleep -Seconds 2
-
-$jobs += Start-Service "Deck Service" "services\deck-service" "3003"
-Start-Sleep -Seconds 2
-
-$jobs += Start-Service "Matchmaking Service" "services\matchmaking-service" "3004"
-Start-Sleep -Seconds 2
-
-$jobs += Start-Service "Game Service" "services\game-service" "3005"
-Start-Sleep -Seconds 2
-
-$jobs += Start-Service "Notification Service" "services\notification-service" "3006"
+$jobs += Start-Service "Notification Service" "notification-service" "3006"
 Start-Sleep -Seconds 2
 
 $jobs += Start-Service "Frontend" "frontend" "3000"

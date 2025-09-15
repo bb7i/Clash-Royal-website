@@ -31,73 +31,27 @@ echo ✅ Node.js found
 
 REM Install dependencies for all services
 echo.
-echo 📦 Installing dependencies for all services...
+echo 📦 Installing dependencies...
 
 echo.
-echo Installing auth-service...
-cd services\auth-service
+echo Installing game service (root)...
 npm install
 if %errorlevel% neq 0 (
-    echo ❌ Failed to install auth-service dependencies!
+    echo ❌ Failed to install root service dependencies!
     pause
     exit /b 1
 )
-cd ..\..
-
-echo.
-echo Installing user-service...
-cd services\user-service
-npm install
-if %errorlevel% neq 0 (
-    echo ❌ Failed to install user-service dependencies!
-    pause
-    exit /b 1
-)
-cd ..\..
-
-echo.
-echo Installing deck-service...
-cd services\deck-service
-npm install
-if %errorlevel% neq 0 (
-    echo ❌ Failed to install deck-service dependencies!
-    pause
-    exit /b 1
-)
-cd ..\..
-
-echo.
-echo Installing matchmaking-service...
-cd services\matchmaking-service
-npm install
-if %errorlevel% neq 0 (
-    echo ❌ Failed to install matchmaking-service dependencies!
-    pause
-    exit /b 1
-)
-cd ..\..
-
-echo.
-echo Installing game-service...
-cd services\game-service
-npm install
-if %errorlevel% neq 0 (
-    echo ❌ Failed to install game-service dependencies!
-    pause
-    exit /b 1
-)
-cd ..\..
 
 echo.
 echo Installing notification-service...
-cd services\notification-service
+cd notification-service
 npm install
 if %errorlevel% neq 0 (
     echo ❌ Failed to install notification-service dependencies!
     pause
     exit /b 1
 )
-cd ..\..
+cd ..
 
 echo.
 echo Installing frontend...
